@@ -6,9 +6,17 @@ const bodyParser = require('body-parser');
 const app = express();
 dotenv.config();
 
-const PORT = process.env.PORT || 8070;
+const PORT = process.env.PORT || 3000;
 
-app.use(cors());
+const corsOptions = {
+  origin: 'http://localhost:3000', // Replace with your frontend URL in production
+  methods: ['GET', 'POST', 'PUT', 'DELETE'],
+  credentials: true,
+};
+
+// Use the CORS middleware
+app.use(cors(corsOptions));
+
 app.use(bodyParser.json());
 
 // Connect database

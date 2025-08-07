@@ -8,7 +8,7 @@ export default function AddStudent() {
   const [sid, setSid] = useState("");
   const [gender, setGender] = useState("");
   const [contactNumber, setContactNumber] = useState("");
-  const [address, setAddress] = useState({ city: "", state: "", zip: "" });
+  const [address, setAddress] = useState({street:"", city: "", state: "", zip: "" });
   const [marks, setMarks] = useState([{ subject: "", score: 0 }]);
   const [attendance, setAttendance] = useState(100);
   const navigate = useNavigate();
@@ -17,6 +17,7 @@ export default function AddStudent() {
   const handleAddressChange = (e) => {
     const { name, value } = e.target;
     setAddress((prevAddress) => ({ ...prevAddress, [name]: value }));
+    console.log({name,value,address});
   };
 
   // Handle individual mark field changes
@@ -74,8 +75,7 @@ export default function AddStudent() {
       denyButtonText: `Don't save`,
     }).then((result) => {
       if (result.isConfirmed) {
-        axios
-          .post("https://sttiss-api.vercel.app/student/add", newStudent)
+        axios.post("/student/add", newStudent)
           .then(() => {
             Swal.fire("Student has been successfully saved!", "", "success");
             navigate("/");
@@ -110,13 +110,13 @@ export default function AddStudent() {
           />
         </div>
         <div className="mb-3">
-          <label htmlFor="nim" className="form-label">
+          <label htmlFor="sid" className="form-label">
             Student ID
           </label>
           <input
             type="number"
             className="form-control"
-            id="nim"
+            id="sid"
             placeholder="Enter your student ID"
             value={sid}
             onChange={(e) => setSid(e.target.value)}

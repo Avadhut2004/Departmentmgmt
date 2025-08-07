@@ -3,6 +3,7 @@ import axios from "axios";
 import { useParams, useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
 
+
 const ShowOne = () => {
   const { id } = useParams();
   const navigate = useNavigate();
@@ -20,6 +21,7 @@ const ShowOne = () => {
     const fetchUser = async () => {
       try {
         const response = await axios.get(`https://sttiss-api.vercel.app/student/get/${id}`);
+        console.log(response.data.user);
         const fetchedUser = response.data.user || {};
         setUser({
           ...fetchedUser,
@@ -31,6 +33,7 @@ const ShowOne = () => {
     };
 
     fetchUser();
+
   }, [id]);
 
   const handleInputChange = (field, value) => {
@@ -121,16 +124,16 @@ const ShowOne = () => {
           />
         </div>
 
-        {/* Address Section */}
+        {/* Address Section */} 
         <div>
-          <label>Address</label>
+           <label>Address</label>
           <input
             type="text"
             placeholder="Street"
             value={user.address.street || ""}
             onChange={(e) => handleAddressChange("street", e.target.value)}
-          />
-          <input
+          /> 
+           <input
             type="text"
             placeholder="City"
             value={user.address.city || ""}

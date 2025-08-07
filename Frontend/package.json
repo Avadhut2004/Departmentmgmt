@@ -28,6 +28,7 @@
       "react-app/jest"
     ]
   },
+  "proxy": "https://sttiss-api.vercel.app",
   "browserslist": {
     "production": [
       ">0.2%",
